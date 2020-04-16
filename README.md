@@ -25,18 +25,32 @@ to the Scala compiler.
 
 ### Reproduction
 
-Compile this project:
+Compile this project using `sbt`.
+
+If you already have `sbt` installed, you can use that directly.
 
 ```
 // from the project root
 $ sbt compile
 ```
 
+Alternatively, for your convenience `sbt` is included in the
+repository so reproducing this example only needs a compatible JDK.
+
+```
+// from the project root
+$ ./sbt run
+```
+
 Observe the compile error.
+
+If you get other errors it may be because your JDK version is not
+compatible with the Scala compiler.
+[Java 8 is recommended for compiling Scala code](https://docs.scala-lang.org/overviews/jdk-compatibility/overview.html).
 
 ## Alternative bug
 
-Line 15 is an alternative implementation that explicitly calls the
+Line 12 is an alternative implementation that explicitly calls the
 inline / reified method with the type fixed to `String`. This version
 compiles, but crashes at runtime.
 
@@ -52,8 +66,8 @@ java.lang.UnsupportedOperationException: This function has a reified type parame
 
 ### Reproduction
 
-1. Comment out line 14 (which does not compile)
-2. Uncomment line 15
+1. Comment out line 11 (which does not compile)
+2. Uncomment line 12
 3. Run the server
 4. Connect to the server using wscat or similar
 5. Send a message and observe the stack trace
@@ -64,7 +78,10 @@ To run the server, execute the following command from the root of
 the project.
 
 ```
+// from the project root
 $ sbt run
+// or
+$ ./sbt run
 ```
 
 To connect to the server using wscat, execute the following command
